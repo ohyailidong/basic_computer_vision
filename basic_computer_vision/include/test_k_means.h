@@ -1,7 +1,9 @@
 #include "../include/k_means.h"
 
-#define K    3    //分类数
-#define ITER 1000  //最大迭代次数
+#define CLUSTER_NUM    3    //分类cluster数目
+#define MAXITER_NUM 1000    //最大迭代次数
+#define INIT_CENTER 2		//初始化中心点方法
+
 const std::string filename0 = "images/test_data/lena.png";
 const std::string filename1 = "images/test_data/building.jpeg";
 const std::string filename2 = "images/test_data/trump.jpg";
@@ -15,26 +17,13 @@ void Test_Kmeans::Run()
 {
 	cv::Mat img = cv::imread(filename0, 1);
 
-	if (img.empty()) {
-		std::cerr << "useage: ./test_k_means input_image_path k iteration\n "
-			"example: ./test_k_means "
-			"../images/test_data/lena.png 3 10"
-			<< std::endl;
+	if (img.empty() || img.channels() != 3)
 		std::exit(-1);
-	}
 
-	if (img.channels() != 3) {
-		std::cout << "please use a image with 3 channels";
-		std::exit(-1);
-	}
+	int convergence_radius = 1e-6;//最小收敛半径
 
-	int k = K;
-	int iteration = ITER;
-
-	int convergence_radius = 1e-6;
-
-	Kmeans kmeans(img, k);
-	kmeans.run(iteration, convergence_radius);
+	Kmeans kmeans(img, CLUSTER_NUM, INIT_CENTER);
+	kmeans.run(MAXITER_NUM, convergence_radius);
 
 	std::vector<Sample> samples = kmeans.get_result_samples();
 	std::vector<Center> centers = kmeans.get_result_centers();

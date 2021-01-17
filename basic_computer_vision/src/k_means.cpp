@@ -5,12 +5,6 @@
 static std::random_device rd;
 static std::mt19937 rng(rd());
 
-/**
- * @brief get_random_index, check_convergence, calc_square_distance are helper
- * functions, you can use it to finish your homework:)
- *
- */
-
 std::set<int> get_random_index(int max_idx, int n);
 
 float check_convergence(const std::vector<Center>& current_centers,
@@ -19,13 +13,8 @@ float check_convergence(const std::vector<Center>& current_centers,
 inline float calc_square_distance(const std::array<float, 3>& arr1,
                                   const std::array<float, 3>& arr2);
 
-/**
- * @brief Construct a new Kmeans object
- *
- * @param img : image with 3 channels
- * @param k : wanted number of cluster
- */
-Kmeans::Kmeans(cv::Mat img, const int k) {
+Kmeans::Kmeans(cv::Mat img, const int k, int method) {
+	method_center = method;
     centers_.resize(k);
     last_centers_.resize(k);
     samples_.reserve(img.rows * img.cols);
@@ -42,14 +31,9 @@ Kmeans::Kmeans(cv::Mat img, const int k) {
         }
     }
 }
-
-/**
- * @brief initialize k centers randomly, using set to ensure there are no
- * repeated elements
- *
- */
-// TODO Try to implement a better initialization function
-void Kmeans::initialize_centers() {
+//随机数方法初始化中心点
+void Kmeans::initialize_centers() 
+{
     std::set<int> random_idx =
         get_random_index(samples_.size() - 1, centers_.size());
     int i_center = 0;
@@ -100,10 +84,55 @@ void Kmeans::initialize_centers_pp()
 	}
 	delete[] dist;
 }
-/**
- * @brief change the label of each sample to the nearst center
- *
- */
+
+void Kmeans::initialize_centers_plus()
+{
+	std::array<float, 3>sums{ 0.f,0.f,0.f };
+	std::array<float, 3>center;
+	//计算全局样本的一个中心点,讲所有样本看作一个分类
+	for (Sample& sample : samples_)
+		for (int channel = 0; channel < 3; channel++) 
+			sums[channel] += sample.feature_[channel];
+	for (int channel = 0; channel < 3; channel++)
+		center[channel] = sums[channel]/ samples_.size();
+	//寻找距离该中心点距离最远的一个点
+	float large_dis = -1;
+	Center first_center;
+	for (auto &sample: samples_)
+	{
+		float temp_dis = calc_square_distance(sample.feature_, center);
+		if (temp_dis > large_dis)
+		{
+			large_dis = temp_dis;
+			first_center.feature_ = sample.feature_;
+		}
+	}
+	centers_[0] = first_center;
+	//计算其它的中心点,初步确定每个样本的label值，然后选择最远的那个样本点为新的中心点
+	std::vector<float>distances;
+	for (int i_k = 1; i_k < centers_.size(); ++i_k)
+	{
+		for (auto &sample : samples_)
+		{
+			float smalldistance = FLT_MAX;
+			//for every exsiting center, find the smallest center
+			for (int i_cent = 0; i_cent < i_k; ++i_cent)
+			{
+				float curr_dis = calc_square_distance(sample.feature_, centers_[i_cent].feature_);
+				if (curr_dis < smalldistance)
+				{
+					sample.label_ = i_cent;
+					smalldistance = curr_dis;
+				}
+			}
+			distances.push_back(smalldistance);
+		}
+
+		auto max_iter = std::max_element(distances.begin(), distances.end());
+		centers_[i_k].feature_ = samples_[max_iter - distances.begin()].feature_;
+	}	
+}
+
 void Kmeans::update_labels() {
     for (Sample& sample : samples_) {
         // TODO update labels of each feature
@@ -122,10 +151,6 @@ void Kmeans::update_labels() {
     }
 }
 
-/**
- * @brief move the centers according to new lables
- *
- */
 void Kmeans::update_centers() {
     // backup centers of last iteration
     last_centers_ = centers_;
@@ -140,7 +165,7 @@ void Kmeans::update_centers() {
 			centers_[k].feature_[j] += samples_[i].feature_[j];
 		labelcount[k]++;
 	}
-	// if some cluster appeared to be empty then:
+	//   if some cluster appeared to be empty then:
 	//   1. find the biggest cluster
 	//   2. find the farthest from the center point in the biggest cluster
 	//   3. exclude the farthest point from the biggest cluster and form a new 1-point cluster.
@@ -186,7 +211,7 @@ void Kmeans::update_centers() {
 			centers_[k].feature_[j] += samples_[farthest_i].feature_[j];
 		}
 	}
-
+	// calculate average center 
 	for (int k = 0; k < centers_.size(); k++)
 	{
 		float scale = 1.f / labelcount[k];
@@ -195,16 +220,7 @@ void Kmeans::update_centers() {
 	}
 }
 
-/**
- * @brief check terminate conditions, namely maximal iteration is reached or it
- * convergents
- *
- * @param current_iter
- * @param max_iteration
- * @param smallest_convergence_radius
- * @return true
- * @return false
- */
+
 bool Kmeans::is_terminate(int current_iter, int max_iteration,
                           float smallest_convergence_radius) const {
 	if (max_iteration < 1)
@@ -232,8 +248,22 @@ std::vector<Center> Kmeans::get_result_centers() const {
  * @param smallest_convergence_radius
  */
 void Kmeans::run(int max_iteration, float smallest_convergence_radius) {
-	initialize_centers_pp();
-    initialize_centers();
+	switch (method_center)
+	{
+	case RANDOM_CENTER:
+		initialize_centers();
+		break;
+	case K_MEANS_PP_CENTER:
+		initialize_centers_pp();
+		break;
+	case PLUS:
+		initialize_centers_plus();
+		break;
+	default:
+		initialize_centers();
+		break;
+	}	
+    
     int current_iter = 0;
     while (!is_terminate(current_iter, max_iteration,
                          smallest_convergence_radius)) {
@@ -243,13 +273,7 @@ void Kmeans::run(int max_iteration, float smallest_convergence_radius) {
     }
 }
 
-/**
- * @brief Get n random numbers from 1 to parameter max_idx
- *
- * @param max_idx
- * @param n
- * @return std::set<int> A set of random numbers, which has n elements
- */
+
 std::set<int> get_random_index(int max_idx, int n) {
     std::uniform_int_distribution<int> dist(1, max_idx + 1);
 
@@ -259,13 +283,7 @@ std::set<int> get_random_index(int max_idx, int n) {
     }
     return random_idx;
 }
-/**
- * @brief Calculate the L2 norm of current centers and last centers
- *
- * @param current_centers current assigned centers with 3 channels
- * @param last_centers  last assigned centers with 3 channels
- * @return float
- */
+
 float check_convergence(const std::vector<Center>& current_centers,
                         const std::vector<Center>& last_centers) {
     float convergence_radius = 0;
