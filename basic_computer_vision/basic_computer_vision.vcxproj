@@ -130,12 +130,35 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\display.cpp" />
+    <ClCompile Include="src\feature_points_manager.cpp" />
+    <ClCompile Include="src\gradient_descent_base.cpp" />
+    <ClCompile Include="src\gvf.cpp" />
     <ClCompile Include="src\k_means.cpp" />
+    <ClCompile Include="src\optical_flow_tracker.cpp" />
+    <ClCompile Include="src\snake.cpp" />
+    <ClCompile Include="test\test_optical_flow_tracker.h" />
+    <ClCompile Include="utils\display.cpp" />
+    <ClCompile Include="utils\opencv_utils.cpp" />
+    <ClCompile Include="utils\tictoc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common_define.h" />
+    <ClInclude Include="include\bounding_box.h" />
+    <ClInclude Include="include\display.h" />
+    <ClInclude Include="include\feature_points_manager.h" />
+    <ClInclude Include="include\gradient_descent_base.h" />
+    <ClInclude Include="include\gvf.h" />
     <ClInclude Include="include\k_means.h" />
-    <ClInclude Include="include\test_k_means.h" />
+    <ClInclude Include="include\optical_flow_tracker.h" />
+    <ClInclude Include="include\snake.h" />
+    <ClInclude Include="test\test_gvf.h" />
+    <ClInclude Include="test\test_k_means.h" />
+    <ClInclude Include="test\test_snake.h" />
+    <ClInclude Include="utils\display.h" />
+    <ClInclude Include="utils\math_utils.h" />
+    <ClInclude Include="utils\opencv_utils.h" />
+    <ClInclude Include="utils\tictoc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,12 +12,24 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="include">
+    <Filter Include="segment\k_means">
+      <UniqueIdentifier>{a6f7408c-b042-4734-aa4b-b1c5d0332cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="segment\snake">
+      <UniqueIdentifier>{dcbfadaf-cae0-4862-a80f-79bf383fc38f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="object tracking">
+      <UniqueIdentifier>{51626bbe-6e04-4b04-bf88-4974720c4419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="object tracking\optical flow">
+      <UniqueIdentifier>{8cc883a5-8ed4-4d7f-8a1c-fbd814abfa67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="segment\k_means">
-      <UniqueIdentifier>{a6f7408c-b042-4734-aa4b-b1c5d0332cc9}</UniqueIdentifier>
+    <Filter Include="common\utils">
+      <UniqueIdentifier>{72248927-9605-419e-8f82-aa7640e82d28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -27,16 +39,85 @@
     <ClCompile Include="src\k_means.cpp">
       <Filter>segment\k_means</Filter>
     </ClCompile>
+    <ClCompile Include="src\display.cpp">
+      <Filter>segment\snake</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gradient_descent_base.cpp">
+      <Filter>segment\snake</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gvf.cpp">
+      <Filter>segment\snake</Filter>
+    </ClCompile>
+    <ClCompile Include="src\snake.cpp">
+      <Filter>segment\snake</Filter>
+    </ClCompile>
+    <ClCompile Include="src\feature_points_manager.cpp">
+      <Filter>object tracking\optical flow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\optical_flow_tracker.cpp">
+      <Filter>object tracking\optical flow</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_optical_flow_tracker.h">
+      <Filter>object tracking\optical flow</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\display.cpp">
+      <Filter>common\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\opencv_utils.cpp">
+      <Filter>common\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\tictoc.cpp">
+      <Filter>common\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\k_means.h">
       <Filter>segment\k_means</Filter>
     </ClInclude>
     <ClInclude Include="common_define.h">
-      <Filter>include</Filter>
+      <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="include\test_k_means.h">
+    <ClInclude Include="include\display.h">
+      <Filter>segment\snake</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gradient_descent_base.h">
+      <Filter>segment\snake</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gvf.h">
+      <Filter>segment\snake</Filter>
+    </ClInclude>
+    <ClInclude Include="include\snake.h">
+      <Filter>segment\snake</Filter>
+    </ClInclude>
+    <ClInclude Include="test\test_k_means.h">
       <Filter>segment\k_means</Filter>
+    </ClInclude>
+    <ClInclude Include="test\test_gvf.h">
+      <Filter>segment\snake</Filter>
+    </ClInclude>
+    <ClInclude Include="test\test_snake.h">
+      <Filter>segment\snake</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bounding_box.h">
+      <Filter>object tracking\optical flow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\feature_points_manager.h">
+      <Filter>object tracking\optical flow</Filter>
+    </ClInclude>
+    <ClInclude Include="include\optical_flow_tracker.h">
+      <Filter>object tracking\optical flow</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\display.h">
+      <Filter>common\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\math_utils.h">
+      <Filter>common\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\opencv_utils.h">
+      <Filter>common\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\tictoc.h">
+      <Filter>common\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
