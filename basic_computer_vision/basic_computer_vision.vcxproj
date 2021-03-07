@@ -87,12 +87,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\opencv4.0\opencv\build\include\opencv2;E:\opencv4.0\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\opencv4.0\opencv\build\include\opencv2;E:\opencv4.0\opencv\build\include;E:\opencv_4.5_sln\Source_Code\opencv_contrib-4.5.0\modules\viz\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>E:\opencv4.0\opencv\build\x64\vc15\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world400d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\opencv4.0\opencv\build\x64\vc15\lib;E:\opencv_4.5_sln\lib\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world400d.lib;opencv_viz450d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -118,14 +118,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\opencv4.0\opencv\build\include\opencv2;E:\opencv4.0\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\opencv4.0\opencv\build\include\opencv2;E:\opencv4.0\opencv\build\include;E:\opencv_4.5_sln\Source_Code\opencv_contrib-4.5.0\modules\viz\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>E:\opencv4.0\opencv\build\x64\vc15\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world400.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\opencv4.0\opencv\build\x64\vc15\lib;E:\opencv_4.5_sln\lib\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world400.lib;opencv_viz450.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -135,12 +135,18 @@
     <ClCompile Include="src\gradient_descent_base.cpp" />
     <ClCompile Include="src\gvf.cpp" />
     <ClCompile Include="src\k_means.cpp" />
+    <ClCompile Include="src\ms_segmentation.cpp" />
+    <ClCompile Include="src\ms_tracker.cpp" />
+    <ClCompile Include="src\ms_tracking.cpp" />
     <ClCompile Include="src\optical_flow_tracker.cpp" />
     <ClCompile Include="src\snake.cpp" />
+    <ClCompile Include="test\test_ms_segmentation.h" />
+    <ClCompile Include="test\test_ms_tracking.h" />
     <ClCompile Include="test\test_optical_flow_tracker.h" />
     <ClCompile Include="utils\display.cpp" />
     <ClCompile Include="utils\opencv_utils.cpp" />
     <ClCompile Include="utils\tictoc.cpp" />
+    <ClCompile Include="utils\visualizer_3d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common_define.h" />
@@ -149,7 +155,12 @@
     <ClInclude Include="include\feature_points_manager.h" />
     <ClInclude Include="include\gradient_descent_base.h" />
     <ClInclude Include="include\gvf.h" />
+    <ClInclude Include="include\histogram.h" />
     <ClInclude Include="include\k_means.h" />
+    <ClInclude Include="include\motion_predictor.h" />
+    <ClInclude Include="include\ms_segmentation.h" />
+    <ClInclude Include="include\ms_tracker.h" />
+    <ClInclude Include="include\ms_tracking.h" />
     <ClInclude Include="include\optical_flow_tracker.h" />
     <ClInclude Include="include\snake.h" />
     <ClInclude Include="test\test_gvf.h" />
@@ -159,6 +170,7 @@
     <ClInclude Include="utils\math_utils.h" />
     <ClInclude Include="utils\opencv_utils.h" />
     <ClInclude Include="utils\tictoc.h" />
+    <ClInclude Include="utils\visualizer_3d.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

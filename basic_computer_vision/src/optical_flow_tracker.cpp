@@ -5,7 +5,7 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/video/tracking.hpp>
 #include <vector>
-
+#include <iostream>
 void apply_histo_equalization_around(BoundingBox bbox, cv::Mat img, int ratio_flattenning) {
     cv::Rect2i rect_local(bbox.top_left().x - 0.5 * ratio_flattenning * bbox.width(),
                           bbox.top_left().y - 0.5 * ratio_flattenning * bbox.height(),
@@ -30,6 +30,7 @@ void OpticalFlowTracker::process(BoundingBox initial_bbox, const std::vector<cv:
     feature_points_manager_.initialize(videos[0], initial_bbox);
 
     for (int i = 1; i < videos.size(); i++) {
+		std::cout << "i= " << i << "\n";
         std::vector<cv::Point2f> prev_feature_points = feature_points_manager_.get_feature_points();
 
         std::vector<cv::Point2f> curr_feature_points;

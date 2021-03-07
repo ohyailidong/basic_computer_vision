@@ -31,6 +31,9 @@
     <Filter Include="common\utils">
       <UniqueIdentifier>{72248927-9605-419e-8f82-aa7640e82d28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="object tracking\meanshift">
+      <UniqueIdentifier>{cae2c1c7-f36d-4576-9d4d-ab0670dc3939}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,6 +72,24 @@
     <ClCompile Include="utils\tictoc.cpp">
       <Filter>common\utils</Filter>
     </ClCompile>
+    <ClCompile Include="src\ms_segmentation.cpp">
+      <Filter>object tracking\meanshift</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ms_tracker.cpp">
+      <Filter>object tracking\meanshift</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ms_tracking.cpp">
+      <Filter>object tracking\meanshift</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\visualizer_3d.cpp">
+      <Filter>common\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_ms_segmentation.h">
+      <Filter>object tracking\meanshift</Filter>
+    </ClCompile>
+    <ClCompile Include="test\test_ms_tracking.h">
+      <Filter>object tracking\meanshift</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\k_means.h">
@@ -98,9 +119,6 @@
     <ClInclude Include="test\test_snake.h">
       <Filter>segment\snake</Filter>
     </ClInclude>
-    <ClInclude Include="include\bounding_box.h">
-      <Filter>object tracking\optical flow</Filter>
-    </ClInclude>
     <ClInclude Include="include\feature_points_manager.h">
       <Filter>object tracking\optical flow</Filter>
     </ClInclude>
@@ -117,6 +135,27 @@
       <Filter>common\utils</Filter>
     </ClInclude>
     <ClInclude Include="utils\tictoc.h">
+      <Filter>common\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bounding_box.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\histogram.h">
+      <Filter>object tracking\meanshift</Filter>
+    </ClInclude>
+    <ClInclude Include="include\motion_predictor.h">
+      <Filter>object tracking\meanshift</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ms_segmentation.h">
+      <Filter>object tracking\meanshift</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ms_tracker.h">
+      <Filter>object tracking\meanshift</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ms_tracking.h">
+      <Filter>object tracking\meanshift</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\visualizer_3d.h">
       <Filter>common\utils</Filter>
     </ClInclude>
   </ItemGroup>

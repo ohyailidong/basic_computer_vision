@@ -2,10 +2,11 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerEnvironment>PATH=E:\opencv4.0\opencv\build\x64\vc15\bin</LocalDebuggerEnvironment>
+    <LocalDebuggerEnvironment>PATH=E:\opencv_4.5_sln\bin\Debug;E:\opencv4.0\opencv\build\x64\vc15\bin;E:\VTK-9.0.1_sln\bin\Debug</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LocalDebuggerEnvironment>PATH=E:\opencv4.0\opencv\build\x64\vc15\bin</LocalDebuggerEnvironment>
+    <LocalDebuggerEnvironment>PATH=E:\opencv4.0\opencv\build\x64\vc15\bin;E:\opencv_4.5_sln\bin\Release;E:\VTK-9.0.1_sln\bin\Release</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>

@@ -28,10 +28,9 @@ void TestOpticalFlow::Run() {
     cv::Mat temp = cv::imread(templateFileName, cv::IMREAD_GRAYSCALE);
     cv::Point2i center = template_matching(video[0], temp);
 
-    float w = 0.1;
-    BoundingBox bbox_init(center.x + w * temp.cols, center.y + w * temp.rows, (1 - 2 * w) * temp.cols,
-                          (1 - 2 * w) * temp.rows);
-
+    float w = 0.5;
+    BoundingBox bbox_init(center.x , center.y, 
+		temp.cols, temp.rows);
     OpticalFlowTracker tracker;
     tracker.process(bbox_init, video);
 }

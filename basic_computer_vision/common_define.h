@@ -14,4 +14,6 @@
 #include <opencv2/world.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/opencv.hpp>
+
+#define M_1_PI 3.141592653
 #endif

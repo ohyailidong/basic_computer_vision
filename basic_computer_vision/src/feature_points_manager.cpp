@@ -169,11 +169,11 @@ void FeaturePointsManager::mark_status_with_angle(const std::vector<cv::Vec2f>& 
 		float med_angle = per_dists[std::round(0.5* per_dists.size())];
 		dists.push_back(med_angle);
 	}
-	for (int i = 0; i < dists.size(); i++)
-	{
-		if (dists[i] > shift)
-			status[i] = 0;
-	}
+	//for (int i = 0; i < dists.size(); i++)
+	//{
+	//	if (dists[i] > shift)
+	//		status[i] = 0;
+	//}
 }
 
 void FeaturePointsManager::update_bbox(const std::vector<cv::Vec2f>& motions, std::vector<uchar>& status, int width_img,
@@ -207,7 +207,7 @@ void FeaturePointsManager::update_feature_points(const std::vector<cv::Point2f>&
     assert(feature_points_at_new_position.size() == status.size());
     // update feature points via status(give up bad points)
 	feature_points_.clear();
-	for (int i = 0; i < feature_points_.size(); i++)
+	for (int i = 0; i < feature_points_at_new_position.size(); i++)
 	{
 		if (status[i])
 			feature_points_.push_back(feature_points_at_new_position[i]);
